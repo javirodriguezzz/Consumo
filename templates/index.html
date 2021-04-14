@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumo</title>
+    <script>
+        function hideError()
+        {
+            var dvAnswer = document.getElementById( "dvError" );
+            dvAnswer.innerHTML = "";
+            dvAnswer.style.display = "none";
+        }
+
+        function showError(msg)
+        {
+            var dvAnswer = document.getElementById( "dvError" );
+            dvAnswer.innerHTML = "ERROR: " + msg;
+            dvAnswer.style.display = "block";
+        }
+
+        function validate()
+        {
+            var toret = false;
+            var frmInput = document.getElementById("frmConsumo");
+
+            var km = frmInput["edKm"].value;
+            var tiempo = frmInput["edTiempo"].value;
+            var consumo_medio = frmInput["edConMedio"].value;
+
+            if ( tiempo == 0){
+                showError("El tiempo no puede ser 0.");
+            } else {
+                toret = true;
+            }
+            return toret
+        }
+    </script>
+</head>
+<body>
+    <h1> Cálculo de consumo del vehículo </h1>
+    <p>
+    <form id="frmConsumo" method="POST" action="/do" onSubmit="return validate()">
+            <label for="edKm">Kilómetros: </label>
+            <input type="text" id="edKm" name="edKm"/>
+
+            <label for="edTiempo">Tiempo (horas): </label>
+            <input type="text" id="edTiempo" name="edTiempo"/>
+
+            <label for="edConMedio">Consumo medio (litros cada 100 km): </label>
+            <input type="text" id="edConMedio" name="edConMedio"/>
+            <br>
+            <br>
+            <input type="submit" value="Calcular consumo"/>
+    </form>
+    </p>
+    <p>
+        <div id="dvError" style="color:white;background-color:red;display:none">
+ </div>
+    </p>
+</body>
+</html>
